@@ -1,3 +1,4 @@
+import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/screen/chatScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,11 +28,15 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: theme ? Brightness.dark : Brightness.light),
       home: SafeArea(
-        child: ChatScreen(
+        child: /*ChatScreen(
           toggle: darkLight,
           state: theme,
-        ),
+        ),*/
+            ChatTypeScreen(),
       ),
     );
   }
 }
+
+//Group all the colors
+//

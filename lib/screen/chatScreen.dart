@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:chat_app/shared/colorTheme.dart';
+import 'package:chat_app/shared/dimensions.dart';
 import 'package:chat_app/utils/personTile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900],
+      backgroundColor: CustomColors.NAV_BAR_BACKGROUND_COLOR,
       //App Bar for actions
       /*appBar: AppBar(
         elevation: 0,
@@ -45,23 +47,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
       body:
           //Search Bar
+
           Container(
         height: double.infinity,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 10,
-        ),
-        /*margin: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 10,
-        ),*/
+        padding: CustomInsets.SCREEN_PADDING,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(45),
-            bottomRight: Radius.circular(45),
-          ),
-          color: Colors.white,
+          borderRadius: CustomInsets.SCREEN_BORDER,
+          color: CustomColors.DEFAULT_COLOR,
         ),
         child: Column(
           children: [
@@ -80,6 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 IconButton(
                   icon: Icon(Icons.menu),
                   onPressed: () {},
+                  color: CustomColors.NAV_BAR_COLOR,
                 ),
               ],
             ),
@@ -93,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: Colors.grey[100],
-                //borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
               ),
               //color: Colors.black38,
               child: TextFormField(
@@ -135,6 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         style: GoogleFonts.acme(
                           fontSize: 15,
                           color: Colors.black26,
+                          letterSpacing: 1,
                         ),
                       ),
                     ],
@@ -161,6 +156,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         style: GoogleFonts.acme(
                           fontSize: 15,
                           color: Colors.black26,
+                          letterSpacing: 1,
                         ),
                       ),
                     ],
@@ -170,6 +166,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   PersonTile(),
                   PersonTile(),
+                  PersonTile(),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
@@ -182,14 +182,14 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Icon(Icons.book),
         onPressed: () {},
         elevation: 0,
-        backgroundColor: Colors.indigo[800],
+        backgroundColor: CustomColors.FLOAT_ACTION_BUTTON_COLOR,
       ),
 
       //Bottom Navigation Bar (Google NavBar)
 
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.blueGrey[900]!,
+          color: CustomColors.NAV_BAR_BACKGROUND_COLOR,
         ),
         height: 80,
         padding: const EdgeInsets.symmetric(
@@ -200,22 +200,17 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: EdgeInsets.all(10),
           gap: 8,
           tabActiveBorder: Border.all(
-            color: Colors.white54,
+            color: CustomColors.NAV_BAR_COLOR,
             width: 1,
           ),
           tabBorderRadius: 150,
-          backgroundColor: Colors.blueGrey[900]!,
-          color: Colors.white54,
-          activeColor: Colors.white54,
-          rippleColor: Colors.blueGrey[700]!,
-          hoverColor: Colors.indigo[900]!,
-          tabBackgroundGradient: LinearGradient(
-            colors: [
-              Colors.indigo[800]!,
-              Colors.indigo[700]!,
-            ],
-          ),
-          tabBackgroundColor: Colors.indigo[800]!.withOpacity(0.5),
+          backgroundColor: CustomColors.NAV_BAR_BACKGROUND_COLOR,
+          color: CustomColors.NAV_BAR_COLOR,
+          activeColor: CustomColors.NAV_BAR_ACTIVE_COLOR,
+          rippleColor: CustomColors.NAV_BAR_RIPPLE_COLOR,
+          hoverColor: CustomColors.NAV_BAR_HOVER_COLOR,
+          tabBackgroundGradient: CustomColors.NAV_BAR_GRADIENT,
+          tabBackgroundColor: CustomColors.NAV_BAR_TAB_BACKGROUND_COLOR,
           curve: Curves.easeInOutCirc,
           tabs: [
             GButton(
