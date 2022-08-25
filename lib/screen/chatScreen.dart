@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:chat_app/utils/personTile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 //ignore_for_file:prefer_const_constructors
 
@@ -20,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[900],
       //App Bar for actions
       /*appBar: AppBar(
         elevation: 0,
@@ -44,13 +48,20 @@ class _ChatScreenState extends State<ChatScreen> {
           Container(
         height: double.infinity,
         width: double.infinity,
-        margin: EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 10,
         ),
+        /*margin: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),*/
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          //color: Colors.deepPurple,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(45),
+            bottomRight: Radius.circular(45),
+          ),
+          color: Colors.white,
         ),
         child: Column(
           children: [
@@ -109,58 +120,121 @@ class _ChatScreenState extends State<ChatScreen> {
               height: 20,
             ),
 
-            Row(
-              children: [
-                Icon(
-                  Icons.pin_drop,
-                  color: Colors.black38,
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'Pinned Message',
-                  style: GoogleFonts.acme(
-                    fontSize: 15,
-                    color: Colors.black26,
+            Expanded(
+              child: ListView(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.pin_drop,
+                        color: Colors.black38,
+                      ),
+                      SizedBox(width: 15),
+                      Text(
+                        'Pinned Message',
+                        style: GoogleFonts.acme(
+                          fontSize: 15,
+                          color: Colors.black26,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-
-            SizedBox(
-              height: 20,
-            ),
-
-            PersonTile(),
-            PersonTile(),
-
-            SizedBox(
-              height: 20,
-            ),
-
-            Row(
-              children: [
-                Icon(
-                  Icons.message,
-                  color: Colors.black38,
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'All Message',
-                  style: GoogleFonts.acme(
-                    fontSize: 15,
-                    color: Colors.black26,
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-              ],
+                  PersonTile(),
+                  PersonTile(),
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  //All Messages..
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.message,
+                        color: Colors.black38,
+                      ),
+                      SizedBox(width: 15),
+                      Text(
+                        'All Message',
+                        style: GoogleFonts.acme(
+                          fontSize: 15,
+                          color: Colors.black26,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  PersonTile(),
+                  PersonTile(),
+                ],
+              ),
             ),
           ],
         ),
       ),
+
+      //Message Icon Floating Button
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.book),
         onPressed: () {},
         elevation: 0,
-        backgroundColor: Colors.blue[800],
+        backgroundColor: Colors.indigo[800],
+      ),
+
+      //Bottom Navigation Bar (Google NavBar)
+
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.blueGrey[900]!,
+        ),
+        height: 80,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 10,
+        ),
+        child: GNav(
+          padding: EdgeInsets.all(10),
+          gap: 8,
+          tabActiveBorder: Border.all(
+            color: Colors.white54,
+            width: 1,
+          ),
+          tabBorderRadius: 150,
+          backgroundColor: Colors.blueGrey[900]!,
+          color: Colors.white54,
+          activeColor: Colors.white54,
+          rippleColor: Colors.blueGrey[700]!,
+          hoverColor: Colors.indigo[900]!,
+          tabBackgroundGradient: LinearGradient(
+            colors: [
+              Colors.indigo[800]!,
+              Colors.indigo[700]!,
+            ],
+          ),
+          tabBackgroundColor: Colors.indigo[800]!.withOpacity(0.5),
+          curve: Curves.easeInOutCirc,
+          tabs: [
+            GButton(
+              icon: Icons.home_outlined,
+              text: 'Home',
+              style: GnavStyle.oldSchool,
+            ),
+            GButton(
+              icon: Icons.message_outlined,
+              text: 'Messages',
+              style: GnavStyle.oldSchool,
+            ),
+            GButton(
+              icon: Icons.settings_outlined,
+              text: 'Settings',
+              style: GnavStyle.oldSchool,
+            ),
+          ],
+        ),
       ),
     );
   }

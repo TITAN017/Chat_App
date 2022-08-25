@@ -8,9 +8,10 @@ class PersonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String text = 'Hey there, This is recent text...';
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: Colors.grey[100],
@@ -20,15 +21,29 @@ class PersonTile extends StatelessWidget {
           Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const CircleAvatar(
-            child: Icon(
-              Icons.person,
-              size: 50,
-              color: Colors.black,
-            ),
-            radius: 30,
-            backgroundColor: Colors.black12,
-            //backgroundColor: Colors.black12,
+          Stack(
+            alignment: AlignmentDirectional.bottomEnd,
+            children: [
+              const CircleAvatar(
+                child: Icon(
+                  Icons.person,
+                  size: 50,
+                  color: Colors.black,
+                ),
+                radius: 30,
+                backgroundColor: Colors.black12,
+                //backgroundColor: Colors.black12,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 3, 3),
+                height: 12,
+                width: 12,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.green,
+                ),
+              ),
+            ],
           ),
 
           //Person_information
@@ -66,7 +81,7 @@ class PersonTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Recent Text, How are you ?!',
+                      text.length > 30 ? '${text.substring(0, 26)}...' : text,
                       style: GoogleFonts.acme(
                         fontSize: 15,
                         color: Colors.black12,
