@@ -39,6 +39,7 @@ class CustomColors {
 
   //TEXT BAR CHAT TYPE SCREEN
 
+  static Color TEXT_BAR_BACKGROUND_COLOR = Colors.blueGrey[900]!;
   static Color TEXT_BAR_COLOR = Colors.blueGrey[800]!;
   static LinearGradient TEX_BAR_GRADIENT = const LinearGradient(
     colors: [

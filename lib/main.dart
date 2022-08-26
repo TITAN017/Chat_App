@@ -34,11 +34,11 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: theme ? Brightness.dark : Brightness.light),
       home: SafeArea(
-        child: /*ChatScreen(
+        child: ChatScreen(
           toggle: darkLight,
           state: theme,
-        ),*/
-            ChatTypeScreen(),
+        ),
+        //ChatTypeScreen(),
       ),
     );
   }

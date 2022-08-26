@@ -23,7 +23,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 65,
-        backgroundColor: Colors.white,
+        backgroundColor: CustomColors.DEFAULT_COLOR,
         actions: [
           IconButton(
             icon: Icon(Icons.video_call_outlined),
@@ -41,7 +41,9 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
         foregroundColor: CustomColors.CHAT_APP_BAR_FOREGROUND_COLOR,
         leading: IconButton(
           icon: Icon(Icons.keyboard_return),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Row(
           children: [
@@ -145,6 +147,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                     fillColor: CustomColors.NAV_BAR_COLOR,
                     hintStyle: GoogleFonts.acme(
                       letterSpacing: 1,
+                      color: CustomColors.CHAT,
                     ),
                     border: InputBorder.none,
                   ),
@@ -160,6 +163,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                   onPressed: () {},
                   icon: Icon(Icons.add),
                   iconSize: 30,
+                  color: CustomColors.CHAT,
                 ),
               ),
             ],
