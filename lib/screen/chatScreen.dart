@@ -73,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 IconButton(
                   icon: Icon(Icons.menu),
                   onPressed: () {},
-                  color: CustomColors.NAV_BAR_COLOR,
+                  color: CustomColors.CHAT,
                 ),
               ],
             ),
@@ -179,7 +179,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       //Message Icon Floating Button
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.book),
+        child: Icon(Icons.book_outlined),
         onPressed: () {},
         elevation: 0,
         backgroundColor: CustomColors.FLOAT_ACTION_BUTTON_COLOR,

@@ -1,5 +1,6 @@
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:chat_app/shared/dimensions.dart';
+import 'package:chat_app/utils/chatTile.dart';
 import 'package:chat_app/utils/personTile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +38,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
             iconSize: 27,
           ),
         ],
-        foregroundColor: Colors.grey,
+        foregroundColor: CustomColors.CHAT_APP_BAR_FOREGROUND_COLOR,
         leading: IconButton(
           icon: Icon(Icons.keyboard_return),
           onPressed: () {},
@@ -82,26 +83,33 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
       //Body of Screen
 
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         padding: CustomInsets.SCREEN_PADDING,
         decoration: BoxDecoration(
-          color: CustomColors.DEFAULT_COLOR,
+          color: CustomColors.CHAT_SCREEN_BACKGROUND_COLOR,
           borderRadius: CustomInsets.SCREEN_BORDER,
         ),
         child: Column(
           children: [
             Expanded(
               child: ListView(
-                children: [
-                  PersonTile(),
-                  PersonTile(),
-                  PersonTile(),
-                  PersonTile(),
-                  PersonTile(),
-                  PersonTile(),
-                  PersonTile(),
-                  PersonTile(),
+                children: const [
+                  ChatTile(
+                    user: 'Sender',
+                  ),
+                  ChatTile(
+                    user: 'Receiver',
+                  ),
+                  ChatTile(
+                    user: 'Sender',
+                  ),
+                  ChatTile(
+                    user: 'Sender',
+                  ),
+                  ChatTile(
+                    user: 'Receiver',
+                  ),
                 ],
               ),
             ),

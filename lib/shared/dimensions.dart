@@ -17,4 +17,10 @@ class CustomInsets {
   static EdgeInsets CHAT_TEXT_FIELD_PADDING =
       const EdgeInsets.fromLTRB(15, 10, 15, 5);
   static BorderRadius CHAT_TEXT_FIELD_BORDER = BorderRadius.circular(30);
+
+  //CHAT_TILE_ALIGNMENT
+  static Map<String, AlignmentGeometry> CHAT_TILE_ALIGNMENT = {
+    'Sender': Alignment.topRight,
+    'Receiver': Alignment.topLeft,
+  };
 }

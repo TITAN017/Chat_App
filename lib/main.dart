@@ -1,8 +1,14 @@
 import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/screen/chatScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
+  //initialize the bindings in flutter (low level process)
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //Initialize the firebase app
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
