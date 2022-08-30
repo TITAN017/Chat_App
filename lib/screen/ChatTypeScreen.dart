@@ -88,9 +88,10 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
       body: ScrollConfiguration(
         behavior: NoGlowScroll(),
         child: SingleChildScrollView(
-          //physics: NeverScrollableScrollPhysics(),
           child: Column(
             children: [
+              //Body of Chat type Screen
+
               Container(
                 height: MediaQuery.of(context).size.height - 170,
                 width: MediaQuery.of(context).size.width,
@@ -102,101 +103,72 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: ListView(
-                        children: const [
-                          ChatTile(
-                            user: 'Sender',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Sender',
-                          ),
-                          ChatTile(
-                            user: 'Sender',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                          ChatTile(
-                            user: 'Receiver',
-                          ),
-                        ],
+                      child: ListView.builder(
+                        reverse: true,
+                        itemCount: 20,
+                        itemBuilder: (context, index) {
+                          return index % 2 != 0
+                              ? ChatTile(
+                                  user: 'Sender',
+                                  info: '$index',
+                                )
+                              : ChatTile(
+                                  user: 'Receiver',
+                                  info: '$index',
+                                );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
+
+              //Text Bar of Chat type Screen
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
-                  color: CustomColors.TEXT_BAR_COLOR,
+                  color: Colors.blueGrey[900]!,
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey[900]!,
-                  ),
-                  height: 80,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 15,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 300,
-                        padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: CustomColors.TEXT_BAR_COLOR,
-                        ),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Type here...',
-                            fillColor: CustomColors.NAV_BAR_COLOR,
-                            hintStyle: GoogleFonts.acme(
-                              letterSpacing: 1,
-                              color: CustomColors.CHAT,
-                            ),
-                            border: InputBorder.none,
+                height: 80,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 15,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 300,
+                      padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: CustomColors.TEXT_BAR_COLOR,
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Type here...',
+                          fillColor: CustomColors.NAV_BAR_COLOR,
+                          hintStyle: GoogleFonts.acme(
+                            letterSpacing: 1,
+                            color: CustomColors.CHAT,
                           ),
-                          cursorColor: CustomColors.NAV_BAR_COLOR,
+                          border: InputBorder.none,
                         ),
+                        cursorColor: CustomColors.NAV_BAR_COLOR,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
-                          color: CustomColors.TEXT_BAR_COLOR,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.add),
-                          iconSize: 30,
-                          color: CustomColors.CHAT,
-                        ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
+                        color: CustomColors.TEXT_BAR_COLOR,
                       ),
-                    ],
-                  ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.add),
+                        iconSize: 30,
+                        color: CustomColors.CHAT,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -204,55 +176,5 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
         ),
       ),
     );
-
-    //Bottom Navigation Bar (Text Bar)
-
-    /*bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.blueGrey[900]!,
-        ),
-        height: 80,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 15,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 300,
-              padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: CustomColors.TEXT_BAR_COLOR,
-              ),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Type here...',
-                  fillColor: CustomColors.NAV_BAR_COLOR,
-                  hintStyle: GoogleFonts.acme(
-                    letterSpacing: 1,
-                    color: CustomColors.CHAT,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: CustomColors.NAV_BAR_COLOR,
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
-                color: CustomColors.TEXT_BAR_COLOR,
-              ),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.add),
-                iconSize: 30,
-                color: CustomColors.CHAT,
-              ),
-            ),
-          ],
-        ),
-      ),*/
   }
 }

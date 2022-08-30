@@ -7,24 +7,32 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ChatTile extends StatelessWidget {
   final String user;
-  const ChatTile({required this.user});
+  final String info;
+  const ChatTile({required this.user, required this.info});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user]!,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.6,
-        margin: EdgeInsets.only(top: 7),
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          gradient: CustomColors.CHAT_TILE_GRADIENT[user],
-          borderRadius: BorderRadius.circular(15),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.6,
+          minWidth: 0,
         ),
-        child: Text(
-          '${MediaQuery.of(context).size.width}',
-          style: GoogleFonts.acme(
-            fontSize: 16,
+        child: Container(
+          alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user],
+          //width: MediaQuery.of(context).size.width * 0.6,
+          margin: EdgeInsets.only(top: 7),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            gradient: CustomColors.CHAT_TILE_GRADIENT[user],
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Text(
+            info,
+            style: GoogleFonts.acme(
+              fontSize: 16,
+            ),
           ),
         ),
       ),
