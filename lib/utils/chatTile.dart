@@ -14,25 +14,23 @@ class ChatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user]!,
-      child: ConstrainedBox(
+      child: Container(
+        //alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user],
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.6,
-          minWidth: 0,
+          minWidth: MediaQuery.of(context).size.width * 0,
         ),
-        child: Container(
-          alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user],
-          //width: MediaQuery.of(context).size.width * 0.6,
-          margin: EdgeInsets.only(top: 7),
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            gradient: CustomColors.CHAT_TILE_GRADIENT[user],
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Text(
-            info,
-            style: GoogleFonts.acme(
-              fontSize: 16,
-            ),
+        //width: MediaQuery.of(context).size.width * 0.4,
+        margin: EdgeInsets.only(top: 7),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          gradient: CustomColors.CHAT_TILE_GRADIENT[user],
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Text(
+          info,
+          style: GoogleFonts.acme(
+            fontSize: 16,
           ),
         ),
       ),
