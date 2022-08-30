@@ -19,6 +19,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: CustomColors.NAV_BAR_BACKGROUND_COLOR,
       appBar: AppBar(
         elevation: 0,
@@ -121,53 +122,51 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
 
       //Bottom Navigation Bar (Text Bar)
 
-      bottomNavigationBar: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blueGrey[900]!,
-          ),
-          height: 80,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 15,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 300,
-                padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: CustomColors.TEXT_BAR_COLOR,
-                ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Type here...',
-                    fillColor: CustomColors.NAV_BAR_COLOR,
-                    hintStyle: GoogleFonts.acme(
-                      letterSpacing: 1,
-                      color: CustomColors.CHAT,
-                    ),
-                    border: InputBorder.none,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.blueGrey[900]!,
+        ),
+        height: 80,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 15,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 300,
+              padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: CustomColors.TEXT_BAR_COLOR,
+              ),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Type here...',
+                  fillColor: CustomColors.NAV_BAR_COLOR,
+                  hintStyle: GoogleFonts.acme(
+                    letterSpacing: 1,
+                    color: CustomColors.CHAT,
                   ),
-                  cursorColor: CustomColors.NAV_BAR_COLOR,
+                  border: InputBorder.none,
                 ),
+                cursorColor: CustomColors.NAV_BAR_COLOR,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
-                  color: CustomColors.TEXT_BAR_COLOR,
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.add),
-                  iconSize: 30,
-                  color: CustomColors.CHAT,
-                ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
+                color: CustomColors.TEXT_BAR_COLOR,
               ),
-            ],
-          ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.add),
+                iconSize: 30,
+                color: CustomColors.CHAT,
+              ),
+            ),
+          ],
         ),
       ),
     );
