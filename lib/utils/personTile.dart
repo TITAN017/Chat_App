@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 class PersonTile extends StatelessWidget {
-  const PersonTile({Key? key}) : super(key: key);
+  final String username;
+  final String date;
+  const PersonTile({required this.username, required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class PersonTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Username',
+                      username,
                       style: GoogleFonts.acme(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
@@ -74,7 +76,7 @@ class PersonTile extends StatelessWidget {
                       width: 140,
                     ),
                     Text(
-                      'Date',
+                      date,
                       style: GoogleFonts.acme(
                         color: Colors.black12,
                         fontSize: 15,
