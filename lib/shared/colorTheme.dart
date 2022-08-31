@@ -13,6 +13,11 @@ class CustomColors {
   //SEARCH BAR COLORS
 
   //MESSAGES COLOR
+  static Color MESSAGE_TEXT_COLOR = Colors.black26;
+  static Color ONLINE_INDICATOR_COLOR = Colors.green;
+  static Color MESSAGE_ICON_COLOR = Colors.black;
+  static Color MESSAGE_ICON_BACKGROUND_COLOR = Colors.black12;
+  static Color TYPING_COLOR = Colors.blue;
 
   //FLOATING ACTION BUTTON COLORS
 

@@ -26,6 +26,9 @@ class Database {
           username: doc.get('name'),
           date: doc.get('last_msg'),
           pinned: doc.get('pinned'),
+          typing: doc.get('typing'),
+          recentText: doc.get('msg'),
+          unread: doc.get('unread'),
         );
       },
     ).toList();
