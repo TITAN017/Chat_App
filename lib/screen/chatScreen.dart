@@ -137,66 +137,6 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
 
               PersonTileList(),
-
-              /*Expanded(
-                child: ListView(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.pin_drop,
-                          color: Colors.black38,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          'Pinned Message',
-                          style: GoogleFonts.acme(
-                            fontSize: 15,
-                            color: Colors.black26,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    PersonTile(),
-                    PersonTile(),
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    //All Messages..
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.message,
-                          color: Colors.black38,
-                        ),
-                        SizedBox(width: 15),
-                        Text(
-                          'All Message',
-                          style: GoogleFonts.acme(
-                            fontSize: 15,
-                            color: Colors.black26,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    PersonTile(),
-                    PersonTile(),
-                    PersonTile(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),*/
             ],
           ),
         ),

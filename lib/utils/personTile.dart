@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ffi';
-
 import 'package:chat_app/models/userModel.dart';
 import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/shared/colorTheme.dart';
