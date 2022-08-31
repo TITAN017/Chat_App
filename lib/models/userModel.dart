@@ -1,0 +1,16 @@
+class ChatUser {
+  final String username;
+  final String date;
+  final bool pinned;
+  final String recentText;
+  final bool typing;
+  final int unread;
+  ChatUser({
+    this.username = 'User_loading',
+    this.date = 'loading',
+    this.pinned = true,
+    this.recentText = 'Recent Text',
+    this.typing = true,
+    this.unread = 2,
+  });
+}
