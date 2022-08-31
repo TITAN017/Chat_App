@@ -1,4 +1,5 @@
 import 'package:chat_app/models/currentUser.dart';
+import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/models/userModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +26,7 @@ class Database {
         print('document id is : ${doc.id}');
         var data;
         return ChatUser(
+          id: doc.id,
           username: doc.get('name'),
           date: doc.get('last_msg'),
           pinned: doc.get('pinned'),
@@ -39,32 +41,15 @@ class Database {
 
 class DatabaseChat {
   final CurrentUser user;
-  final String friend;
+  final FriendUser friend;
   late CollectionReference userChat;
   late CollectionReference friendChat;
   DatabaseChat({required this.user, required this.friend}) {
     userChat = FirebaseFirestore.instance
         .collection('Database')
-        .doc(user.name!)
+        .doc(user.name)
         .collection('Friends')
-        .doc(friend)
+        .doc(friend.name)
         .collection('Chats');
-
-    () async {
-      var data = await FirebaseFirestore.instance
-          .collection('Database')
-          .doc(user.name!)
-          .collection('Friends')
-          .doc(friend)
-          .get();
-      String friendName = data.data()!['name'];
-
-      friendChat = FirebaseFirestore.instance
-          .collection('Database')
-          .doc(friendName)
-          .collection('Friends')
-          .doc(user.name!)
-          .collection('Chats');
-    }();
   }
 }

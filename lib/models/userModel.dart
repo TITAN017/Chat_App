@@ -1,4 +1,5 @@
 class ChatUser {
+  final String id;
   final String username;
   final String date;
   final bool pinned;
@@ -6,6 +7,7 @@ class ChatUser {
   final bool typing;
   final int unread;
   ChatUser({
+    this.id = 'random_id',
     this.username = 'User_loading',
     this.date = 'loading',
     this.pinned = true,

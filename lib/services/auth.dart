@@ -8,15 +8,15 @@ class Authenticate {
   static final CollectionReference datRef =
       FirebaseFirestore.instance.collection('Authentication');
 
-  String convertUID(User? u) {
+  CurrentUser convertUID(User? u) {
     if (u == null) {
-      return '';
+      return CurrentUser(name: 'User_1');
     } else {
-      return u.uid;
+      return CurrentUser(name: u.uid);
     }
   }
 
-  Stream<String> get userID {
+  Stream<CurrentUser> get userID {
     return ref.authStateChanges().map(convertUID);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:chat_app/shared/dimensions.dart';
 import 'package:chat_app/shared/scrollGlowRemover.dart';
@@ -10,7 +11,10 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 //ignore_for_file:prefer_const_constructors
 
 class ChatTypeScreen extends StatefulWidget {
-  const ChatTypeScreen({Key? key}) : super(key: key);
+  final FriendUser friend;
+  ChatTypeScreen({required this.friend}) {
+    print('Friend is : ${friend.name} Entering');
+  }
 
   @override
   State<ChatTypeScreen> createState() => _ChatTypeScreenState();
@@ -44,6 +48,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
         leading: IconButton(
           icon: Icon(Icons.keyboard_return),
           onPressed: () {
+            print('Friend is : ${widget.friend.name} leaving');
             Navigator.pop(context);
           },
         ),

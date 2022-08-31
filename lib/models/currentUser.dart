@@ -1,4 +1,4 @@
 class CurrentUser {
-  final String? name;
-  CurrentUser({this.name});
+  final String name;
+  CurrentUser({required this.name});
 }

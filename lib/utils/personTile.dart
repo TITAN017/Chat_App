@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/models/userModel.dart';
 import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/shared/colorTheme.dart';
@@ -19,7 +20,11 @@ class PersonTile extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChatTypeScreen()),
+          MaterialPageRoute(
+            builder: (context) => ChatTypeScreen(
+              friend: FriendUser(name: user.username),
+            ),
+          ),
         );
       },
       child: Container(

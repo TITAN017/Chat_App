@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/models/userModel.dart';
 import 'package:chat_app/services/database.dart';
 import 'package:chat_app/shared/colorTheme.dart';
@@ -25,26 +26,25 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   //final TextEditingController field = TextEditingController();
-  late Database db;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    db = Database('User_1');
-  }
 
   @override
   Widget build(BuildContext context) {
+    final Database db = Database(Provider.of<CurrentUser>(context).name);
+    final String? user = Provider.of<CurrentUser>(context).name;
+    print('USER FROM PROVIDER IS : $user');
     return StreamProvider<List<ChatUser>>.value(
       value: db.chatUsers,
       initialData: [
         ChatUser(
-          username: 'User_laoding',
+          username: 'User_loading',
           date: 'loading',
           pinned: false,
         ),
-        ChatUser(username: 'User_laoding', date: 'loading', pinned: false),
+        ChatUser(
+          username: 'User_loading',
+          date: 'loading',
+          pinned: false,
+        ),
       ],
       child: Scaffold(
         backgroundColor: CustomColors.NAV_BAR_BACKGROUND_COLOR,
