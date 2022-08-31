@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:ffi';
 
 import 'package:chat_app/models/userModel.dart';
@@ -95,31 +97,57 @@ class PersonTile extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          !user.typing
-                              ? user.recentText.length > 30
-                                  ? '${user.recentText.substring(0, 26)}...'
-                                  : user.recentText
-                              : 'Typing....',
-                          style: GoogleFonts.acme(
-                            fontSize: 15,
-                            color: !user.typing
-                                ? CustomColors.MESSAGE_TEXT_COLOR
-                                : CustomColors.TYPING_COLOR,
-                          ),
-                        ),
+                        !user.typing
+                            ? Text(
+                                user.recentText.length > 30
+                                    ? '${user.recentText.substring(0, 26)}...'
+                                    : user.recentText,
+                                style: GoogleFonts.acme(
+                                  fontSize: 15,
+                                  color: !user.typing
+                                      ? CustomColors.MESSAGE_TEXT_COLOR
+                                      : CustomColors.TYPING_COLOR,
+                                ),
+                              )
+                            : RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.edit,
+                                        size: 20,
+                                        color: Colors.blue[800],
+                                      ),
+                                    ),
+                                    WidgetSpan(
+                                      child: SizedBox(
+                                        width: 4,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '${user.username} is typing...',
+                                      style: GoogleFonts.acme(
+                                        fontSize: 15,
+                                        color: Colors.blue[800],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                         const SizedBox(
                           width: 70,
                         ),
-                        CircleAvatar(
-                          child: Text(
-                            '${user.unread}',
-                            style: GoogleFonts.acme(
-                                fontSize: 12, color: Colors.white),
-                          ),
-                          backgroundColor: Colors.red,
-                          radius: 10,
-                        )
+                        user.unread != 0
+                            ? CircleAvatar(
+                                child: Text(
+                                  '${user.unread}',
+                                  style: GoogleFonts.acme(
+                                      fontSize: 12, color: Colors.white),
+                                ),
+                                backgroundColor: Colors.red,
+                                radius: 10,
+                              )
+                            : SizedBox.shrink(),
                       ],
                     ),
                   )
