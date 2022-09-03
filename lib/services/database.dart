@@ -1,3 +1,4 @@
+import 'package:chat_app/models/chat.dart';
 import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/models/userModel.dart';
@@ -27,12 +28,12 @@ class Database {
         var data;
         return ChatUser(
           id: doc.id,
-          username: doc.get('name'),
-          date: doc.get('last_msg'),
-          pinned: doc.get('pinned'),
-          typing: doc.get('typing'),
-          recentText: doc.get('msg'),
-          unread: doc.get('unread'),
+          username: doc.get('name') ?? 'error',
+          date: doc.get('last_msg') ?? 'error',
+          pinned: doc.get('pinned') ?? false,
+          typing: doc.get('typing') ?? false,
+          recentText: doc.get('msg') ?? 'error',
+          unread: doc.get('unread') ?? 0,
         );
       },
     ).toList();
@@ -45,11 +46,56 @@ class DatabaseChat {
   late CollectionReference userChat;
   late CollectionReference friendChat;
   DatabaseChat({required this.user, required this.friend}) {
-    userChat = FirebaseFirestore.instance
-        .collection('Database')
+    userChat = Database.ref
         .doc(user.name)
         .collection('Friends')
-        .doc(friend.name)
+        .doc(friend.id)
         .collection('Chats');
+
+    friendChat = Database.ref
+        .doc(friend.id)
+        .collection('Friends')
+        .doc(user.name)
+        .collection('Chats');
+  }
+
+  Stream<List<UserChat>> get userChats {
+    return userChat.snapshots().map(
+      (s) {
+        return convertUserChat(s, 'Sender');
+      },
+    );
+  }
+
+  Stream<List<FriendChat>> get friendChats {
+    return friendChat.snapshots().map(
+      (s) {
+        return convertFriendChat(s, 'Receiver');
+      },
+    );
+  }
+
+  List<UserChat> convertUserChat(QuerySnapshot s, String type) {
+    return s.docs.map(
+      (doc) {
+        return UserChat(
+          type: type,
+          info: doc.get('info'),
+          date: doc.get('date'),
+        );
+      },
+    ).toList();
+  }
+
+  List<FriendChat> convertFriendChat(QuerySnapshot s, String type) {
+    return s.docs.map(
+      (doc) {
+        return FriendChat(
+          type: type,
+          info: doc.get('info'),
+          date: doc.get('date'),
+        );
+      },
+    ).toList();
   }
 }

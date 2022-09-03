@@ -1,4 +1,5 @@
 class FriendUser {
   final String name;
-  FriendUser({required this.name});
+  final String id;
+  FriendUser({required this.id, required this.name});
 }

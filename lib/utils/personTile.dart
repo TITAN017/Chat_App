@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/models/userModel.dart';
 import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
@@ -22,7 +24,8 @@ class PersonTile extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ChatTypeScreen(
-              friend: FriendUser(name: user.username),
+              user: Provider.of<CurrentUser>(context),
+              friend: FriendUser(id: user.id, name: user.username),
             ),
           ),
         );
@@ -137,9 +140,6 @@ class PersonTile extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                        const SizedBox(
-                          width: 70,
-                        ),
                         user.unread != 0
                             ? CircleAvatar(
                                 child: Text(
