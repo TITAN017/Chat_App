@@ -12,7 +12,8 @@ class ChatTileList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<UserChat> userChats = Provider.of<List<UserChat>>(context);
     final List<FriendChat> friendChats = Provider.of<List<FriendChat>>(context);
-    final List chats = [...userChats.reversed, ...friendChats.reversed];
+    final List chats = [...userChats, ...friendChats];
+    chats.sort((a, b) => b.date.compareTo(a.date));
     return Container(
       height: MediaQuery.of(context).size.height - 170,
       width: MediaQuery.of(context).size.width,

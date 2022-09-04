@@ -17,7 +17,6 @@ class PersonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String text = 'Hey there, This is recent text...';
     return GestureDetector(
       onTap: () {
         Navigator.push(

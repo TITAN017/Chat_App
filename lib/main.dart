@@ -1,9 +1,6 @@
 import 'package:chat_app/models/currentUser.dart';
-import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/screen/chatScreen.dart';
 import 'package:chat_app/services/auth.dart';
-import 'package:chat_app/services/database.dart';
-import 'package:chat_app/utils/testing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

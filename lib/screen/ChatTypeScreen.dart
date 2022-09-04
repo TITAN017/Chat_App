@@ -100,18 +100,27 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Username',
+                    widget.friend.name,
                     style: GoogleFonts.acme(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    'Action...',
-                    style: GoogleFonts.acme(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
+                  StreamBuilder(
+                    stream: dbc.status,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return SizedBox.shrink();
+                      } else {
+                        return Text(
+                          snapshot.data as bool ? 'Online' : 'Offline',
+                          style: GoogleFonts.acme(
+                            color: Colors.grey,
+                            fontSize: 14,
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ],
               )
@@ -150,6 +159,11 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                           color: CustomColors.TEXT_BAR_COLOR,
                         ),
                         child: TextFormField(
+                          style: GoogleFonts.acme(
+                            letterSpacing: 1,
+                            color: CustomColors.CHAT,
+                            fontSize: 18,
+                          ),
                           controller: controller,
                           onChanged: (val) {
                             info = val;
@@ -178,6 +192,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                             hintStyle: GoogleFonts.acme(
                               letterSpacing: 1,
                               color: CustomColors.CHAT,
+                              fontSize: 16,
                             ),
                             border: InputBorder.none,
                           ),
@@ -190,7 +205,10 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                           color: CustomColors.TEXT_BAR_COLOR,
                         ),
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            dbc.deleteAll(total);
+                            total = 0;
+                          },
                           icon: Icon(Icons.add),
                           iconSize: 30,
                           color: CustomColors.CHAT,

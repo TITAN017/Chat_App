@@ -100,7 +100,7 @@ class DatabaseChat {
     ).toList();
   }
 
-  Future addChat(UserChat c, int chatNumber) async {
+  Future<void> addChat(UserChat c, int chatNumber) async {
     try {
       await userChat
           .doc('chat_$chatNumber')
@@ -109,9 +109,31 @@ class DatabaseChat {
           .doc(user.name)
           .collection('Friends')
           .doc(friend.id)
-          .update({'total': chatNumber});
+          .update({'total': chatNumber, 'last_msg': c.date, 'msg': c.info});
     } catch (e) {
       print('error : $e');
     }
+  }
+
+  Future<void> deleteAll(int total) async {
+    try {
+      for (int i = 1; i <= total; i++) {
+        await userChat.doc('chat_$i').delete();
+      }
+      await Database.ref
+          .doc(user.name)
+          .collection('Friends')
+          .doc(friend.id)
+          .update({'total': 0});
+    } catch (e) {
+      print('error delete all : $e');
+    }
+  }
+
+  Stream<bool> get status {
+    return Database.ref
+        .doc(friend.id)
+        .snapshots()
+        .map((s) => (s.data() as Map<String, dynamic>)['online']);
   }
 }
