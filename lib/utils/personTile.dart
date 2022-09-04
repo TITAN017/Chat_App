@@ -1,10 +1,13 @@
-import 'dart:ffi';
+// ignore_for_file: prefer_const_constructors
 
+import 'package:chat_app/models/currentUser.dart';
+import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/models/userModel.dart';
 import 'package:chat_app/screen/ChatTypeScreen.dart';
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
@@ -14,12 +17,20 @@ class PersonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String text = 'Hey there, This is recent text...';
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChatTypeScreen()),
+          MaterialPageRoute(
+            builder: (context) => ChatTypeScreen(
+              user: Provider.of<CurrentUser>(context),
+              friend: FriendUser(
+                id: user.id,
+                name: user.username,
+                total: user.total,
+              ),
+            ),
+          ),
         );
       },
       child: Container(
@@ -95,31 +106,54 @@ class PersonTile extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          !user.typing
-                              ? user.recentText.length > 30
-                                  ? '${user.recentText.substring(0, 26)}...'
-                                  : user.recentText
-                              : 'Typing....',
-                          style: GoogleFonts.acme(
-                            fontSize: 15,
-                            color: !user.typing
-                                ? CustomColors.MESSAGE_TEXT_COLOR
-                                : CustomColors.TYPING_COLOR,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 70,
-                        ),
-                        CircleAvatar(
-                          child: Text(
-                            '${user.unread}',
-                            style: GoogleFonts.acme(
-                                fontSize: 12, color: Colors.white),
-                          ),
-                          backgroundColor: Colors.red,
-                          radius: 10,
-                        )
+                        !user.typing
+                            ? Text(
+                                user.recentText.length > 30
+                                    ? '${user.recentText.substring(0, 26)}...'
+                                    : user.recentText,
+                                style: GoogleFonts.acme(
+                                  fontSize: 15,
+                                  color: !user.typing
+                                      ? CustomColors.MESSAGE_TEXT_COLOR
+                                      : CustomColors.TYPING_COLOR,
+                                ),
+                              )
+                            : RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.edit,
+                                        size: 20,
+                                        color: Colors.blue[800],
+                                      ),
+                                    ),
+                                    WidgetSpan(
+                                      child: SizedBox(
+                                        width: 4,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '${user.username} is typing...',
+                                      style: GoogleFonts.acme(
+                                        fontSize: 15,
+                                        color: Colors.blue[800],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        user.unread != 0
+                            ? CircleAvatar(
+                                child: Text(
+                                  '${user.unread}',
+                                  style: GoogleFonts.acme(
+                                      fontSize: 12, color: Colors.white),
+                                ),
+                                backgroundColor: Colors.red,
+                                radius: 10,
+                              )
+                            : SizedBox.shrink(),
                       ],
                     ),
                   )
