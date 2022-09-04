@@ -61,5 +61,4 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-/* Add multiple providers for chat type screen to subscribe to 2 streams for chats
-    Added user,friend parameter passing to chatTypeScreen*/
+/* Add proper scrolling in ChatTypeScreen*/

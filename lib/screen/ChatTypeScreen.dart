@@ -30,13 +30,22 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
   late DatabaseChat dbc;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dbc = DatabaseChat(user: widget.user, friend: widget.friend);
   }
 
+  late int total = widget.friend.total;
+  final TextEditingController controller = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> key = GlobalKey<FormState>();
+    String info = '';
     return MultiProvider(
       providers: [
         StreamProvider<List<UserChat>>.value(
@@ -134,14 +143,36 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 280,
+                        width: 300,
                         padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: CustomColors.TEXT_BAR_COLOR,
                         ),
                         child: TextFormField(
+                          controller: controller,
+                          onChanged: (val) {
+                            info = val;
+                          },
                           decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Align(
+                                child: Icon(Icons.send),
+                                widthFactor: 1,
+                                heightFactor: 2,
+                              ),
+                              iconSize: 30,
+                              color: CustomColors.CHAT,
+                              onPressed: () async {
+                                if (info.isNotEmpty) {
+                                  controller.clear();
+                                  await dbc.addChat(
+                                      UserChat(info: info, date: '9:12'),
+                                      total + 1);
+                                  total += 1;
+                                }
+                              },
+                            ),
                             hintText: 'Type here...',
                             fillColor: CustomColors.NAV_BAR_COLOR,
                             hintStyle: GoogleFonts.acme(

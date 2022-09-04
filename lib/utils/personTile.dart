@@ -25,7 +25,11 @@ class PersonTile extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => ChatTypeScreen(
               user: Provider.of<CurrentUser>(context),
-              friend: FriendUser(id: user.id, name: user.username),
+              friend: FriendUser(
+                id: user.id,
+                name: user.username,
+                total: user.total,
+              ),
             ),
           ),
         );

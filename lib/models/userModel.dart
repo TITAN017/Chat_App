@@ -6,6 +6,7 @@ class ChatUser {
   final String recentText;
   final bool typing;
   final int unread;
+  final int total;
   ChatUser({
     this.id = 'random_id',
     this.username = 'User_loading',
@@ -14,5 +15,6 @@ class ChatUser {
     this.recentText = 'Recent Text',
     this.typing = true,
     this.unread = 2,
+    this.total = 0,
   });
 }

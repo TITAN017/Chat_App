@@ -34,6 +34,7 @@ class Database {
           typing: doc.get('typing') ?? false,
           recentText: doc.get('msg') ?? 'error',
           unread: doc.get('unread') ?? 0,
+          total: doc.get('total') ?? 0,
         );
       },
     ).toList();
@@ -97,5 +98,20 @@ class DatabaseChat {
         );
       },
     ).toList();
+  }
+
+  Future addChat(UserChat c, int chatNumber) async {
+    try {
+      await userChat
+          .doc('chat_$chatNumber')
+          .set({'info': c.info, 'date': c.date});
+      await Database.ref
+          .doc(user.name)
+          .collection('Friends')
+          .doc(friend.id)
+          .update({'total': chatNumber});
+    } catch (e) {
+      print('error : $e');
+    }
   }
 }
