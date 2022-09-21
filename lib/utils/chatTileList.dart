@@ -26,6 +26,7 @@ class ChatTileList extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               reverse: true,
               itemCount: chats.length,
               itemBuilder: (context, index) {

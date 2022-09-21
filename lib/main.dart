@@ -1,5 +1,6 @@
 import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/screen/chatScreen.dart';
+import 'package:chat_app/screen/signin.dart';
 import 'package:chat_app/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +48,11 @@ class _MyAppState extends State<MyApp> {
         theme:
             ThemeData(brightness: theme ? Brightness.dark : Brightness.light),
         home: SafeArea(
-          child: ChatScreen(
+          child: /*ChatScreen(
             toggle: darkLight,
             state: theme,
-          ),
+          )*/
+              Signin(),
           //ChatTypeScreen(),
         ),
       ),
@@ -58,4 +60,5 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-/* Add proper scrolling in ChatTypeScreen*/
+/* Added Gesture detector for the chat tile*/
+/*Added Signin page*/

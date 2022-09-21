@@ -14,23 +14,36 @@ class ChatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: CustomInsets.CHAT_TILE_ALIGNMENT[chat.type]!,
-      child: Container(
-        //alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user],
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.6,
-          minWidth: MediaQuery.of(context).size.width * 0,
-        ),
-        //width: MediaQuery.of(context).size.width * 0.4,
-        margin: EdgeInsets.only(top: 7),
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          gradient: CustomColors.CHAT_TILE_GRADIENT[chat.type],
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Text(
-          chat.info,
-          style: GoogleFonts.acme(
-            fontSize: 16,
+      child: GestureDetector(
+        onLongPress: () {
+          print("Holding the chat...");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Scaffold();
+              },
+            ),
+          );
+        },
+        child: Container(
+          //alignment: CustomInsets.CHAT_TILE_ALIGNMENT[user],
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width * 0.6,
+            minWidth: MediaQuery.of(context).size.width * 0,
+          ),
+          //width: MediaQuery.of(context).size.width * 0.4,
+          margin: EdgeInsets.only(top: 7),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            gradient: CustomColors.CHAT_TILE_GRADIENT[chat.type],
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Text(
+            chat.info,
+            style: GoogleFonts.acme(
+              fontSize: 16,
+            ),
           ),
         ),
       ),
