@@ -144,7 +144,15 @@ class _ChatScreenState extends State<ChatScreen> {
         //Message Icon Floating Button
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.book_outlined),
-          onPressed: () {},
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Clicked me!"),
+                duration: Duration(seconds: 1),
+                backgroundColor: Colors.deepOrange,
+              ),
+            );
+          },
           elevation: 0,
           backgroundColor: CustomColors.FLOAT_ACTION_BUTTON_COLOR,
         ),

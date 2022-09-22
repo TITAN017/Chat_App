@@ -11,6 +11,10 @@ class CustomInsets {
     horizontal: 20,
     vertical: 10,
   );
+  static BorderRadius SIGNIN_BORDER_RADIUS = const BorderRadius.only(
+    topLeft: Radius.circular(20),
+    topRight: Radius.circular(20),
+  );
 
   //CHAT_TEXT_FIELD_DIMENSIONS
 
