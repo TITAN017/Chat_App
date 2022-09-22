@@ -3,15 +3,15 @@ import 'package:chat_app/shared/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Signin extends StatefulWidget {
+class Login extends StatefulWidget {
   VoidCallback toggle;
-  Signin(this.toggle);
+  Login(this.toggle);
 
   @override
-  State<Signin> createState() => _SigninState();
+  State<Login> createState() => _SigninState();
 }
 
-class _SigninState extends State<Signin> {
+class _SigninState extends State<Login> {
   bool isObscure = true;
   late GlobalKey key;
   final TextEditingController email = TextEditingController();
@@ -73,7 +73,7 @@ class _SigninState extends State<Signin> {
                   children: [
                     //Sign in text
                     Text(
-                      "Sign-in",
+                      "Log-in",
                       style: GoogleFonts.acme(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -171,7 +171,7 @@ class _SigninState extends State<Signin> {
                               child: TextButton(
                                 onPressed: () {
                                   widget.toggle();
-                                  print('signin');
+                                  print('login');
                                 },
                                 child: Text(
                                   'Submit',
@@ -192,10 +192,10 @@ class _SigninState extends State<Signin> {
                                   style: GoogleFonts.acme(color: Colors.grey),
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: "Already have an Account?",
+                                      text: "Don't have an Account?",
                                     ),
                                     TextSpan(
-                                      text: "  Login!",
+                                      text: "  Signin!",
                                       style: GoogleFonts.acme(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
@@ -221,7 +221,7 @@ class _SigninState extends State<Signin> {
                                     horizontal: 5,
                                   ),
                                   child: Text(
-                                    'Or Signin With',
+                                    'Or Login With',
                                     style: GoogleFonts.acme(color: Colors.grey),
                                   ),
                                 ),

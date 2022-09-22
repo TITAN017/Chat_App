@@ -1,5 +1,6 @@
 import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/screen/chatScreen.dart';
+import 'package:chat_app/screen/login.dart';
 import 'package:chat_app/screen/signin.dart';
 import 'package:chat_app/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +26,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late Authenticate auth;
   bool theme = false;
+  bool authToggle = true;
+  void toggle() {
+    setState(() {
+      authToggle = !authToggle;
+      print('done');
+    });
+  }
+
   void darkLight() {
     setState(() {
       theme = !theme;
@@ -52,7 +61,7 @@ class _MyAppState extends State<MyApp> {
             toggle: darkLight,
             state: theme,
           )*/
-              Signin(),
+              authToggle ? Login(toggle) : Signin(toggle),
           //ChatTypeScreen(),
         ),
       ),
@@ -62,3 +71,4 @@ class _MyAppState extends State<MyApp> {
 
 /* Added Gesture detector for the chat tile*/
 /*Added Signin page*/
+/*Added Login Page*/
