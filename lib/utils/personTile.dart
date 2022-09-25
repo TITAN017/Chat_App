@@ -3,7 +3,7 @@
 import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/models/friendUser.dart';
 import 'package:chat_app/models/userModel.dart';
-import 'package:chat_app/screen/ChatTypeScreen.dart';
+import 'package:chat_app/screen/home/ChatTypeScreen.dart';
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

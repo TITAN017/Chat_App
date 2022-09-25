@@ -1,7 +1,8 @@
 import 'package:chat_app/models/currentUser.dart';
-import 'package:chat_app/screen/chatScreen.dart';
-import 'package:chat_app/screen/login.dart';
-import 'package:chat_app/screen/signin.dart';
+import 'package:chat_app/screen/home/chatScreen.dart';
+import 'package:chat_app/screen/auth/login.dart';
+import 'package:chat_app/screen/auth/signin.dart';
+import 'package:chat_app/screen/wrapper.dart';
 import 'package:chat_app/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,21 +26,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Authenticate auth;
-  bool theme = false;
-  bool authToggle = true;
-  void toggle() {
-    setState(() {
-      authToggle = !authToggle;
-      print('done');
-    });
-  }
-
-  void darkLight() {
-    setState(() {
-      theme = !theme;
-      print('toggled $theme');
-    });
-  }
 
   @override
   void initState() {
@@ -51,17 +37,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return StreamProvider<CurrentUser>.value(
       value: auth.userID,
-      initialData: CurrentUser(name: 'User_1'),
+      initialData: CurrentUser(name: 'null'),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(brightness: theme ? Brightness.dark : Brightness.light),
+        /*theme:
+            ThemeData(brightness: theme ? Brightness.dark : Brightness.light),*/
         home: SafeArea(
           child: /*ChatScreen(
             toggle: darkLight,
             state: theme,
           )*/
-              authToggle ? Login(toggle) : Signin(toggle),
+              Wrapper(),
           //ChatTypeScreen(),
         ),
       ),

@@ -8,6 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 class Database {
   static final CollectionReference ref =
       FirebaseFirestore.instance.collection('Database');
+  static final CollectionReference authRef =
+      FirebaseFirestore.instance.collection('Authentication');
   CollectionReference? userRef;
 
   Database(String user) {

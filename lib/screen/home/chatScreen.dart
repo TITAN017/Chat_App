@@ -2,6 +2,7 @@
 
 import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/models/userModel.dart';
+import 'package:chat_app/services/auth.dart';
 import 'package:chat_app/services/database.dart';
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:chat_app/shared/dimensions.dart';
@@ -34,18 +35,7 @@ class _ChatScreenState extends State<ChatScreen> {
     print('USER FROM PROVIDER IS : $user');
     return StreamProvider<List<ChatUser>>.value(
       value: db.chatUsers,
-      initialData: [
-        ChatUser(
-          username: 'User_loading',
-          date: 'loading',
-          pinned: false,
-        ),
-        ChatUser(
-          username: 'User_loading',
-          date: 'loading',
-          pinned: false,
-        ),
-      ],
+      initialData: [],
       child: Scaffold(
         backgroundColor: CustomColors.NAV_BAR_BACKGROUND_COLOR,
         //App Bar for actions
@@ -144,7 +134,7 @@ class _ChatScreenState extends State<ChatScreen> {
         //Message Icon Floating Button
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.book_outlined),
-          onPressed: () {
+          onPressed: () async {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text("Clicked me!"),
@@ -152,6 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 backgroundColor: Colors.deepOrange,
               ),
             );
+            await Authenticate.signout();
           },
           elevation: 0,
           backgroundColor: CustomColors.FLOAT_ACTION_BUTTON_COLOR,

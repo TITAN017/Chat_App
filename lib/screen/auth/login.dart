@@ -1,5 +1,7 @@
+import 'package:chat_app/services/auth.dart';
 import 'package:chat_app/shared/colorTheme.dart';
 import 'package:chat_app/shared/dimensions.dart';
+import 'package:chat_app/shared/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,7 +41,7 @@ class _SigninState extends State<Login> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('lib/assets/bgimage1.jpg'),
+          image: AssetImage('lib/assets/bgimage2.jpg'),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
             Colors.black.withOpacity(0.25),
@@ -74,10 +76,7 @@ class _SigninState extends State<Login> {
                     //Sign in text
                     Text(
                       "Log-in",
-                      style: GoogleFonts.acme(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: CustomFonts.HEADER,
                     ),
                     const SizedBox(
                       height: 25,
@@ -92,9 +91,7 @@ class _SigninState extends State<Login> {
                           children: [
                             Text(
                               "Email",
-                              style: GoogleFonts.acme(
-                                fontSize: 23,
-                              ),
+                              style: CustomFonts.FIELDS,
                             ),
                             const SizedBox(
                               height: 10,
@@ -106,9 +103,7 @@ class _SigninState extends State<Login> {
                               validator: (val) => null,
                               decoration: InputDecoration(
                                 hintText: "Your Email",
-                                hintStyle: GoogleFonts.acme(
-                                  fontSize: 15,
-                                ),
+                                hintStyle: CustomFonts.HINT_TEXT,
                               ),
                             ),
                             const SizedBox(
@@ -116,9 +111,7 @@ class _SigninState extends State<Login> {
                             ),
                             Text(
                               "Password",
-                              style: GoogleFonts.acme(
-                                fontSize: 23,
-                              ),
+                              style: CustomFonts.FIELDS,
                             ),
                             const SizedBox(
                               height: 10,
@@ -138,9 +131,7 @@ class _SigninState extends State<Login> {
                                         isObscure = !isObscure;
                                       });
                                     }),
-                                hintStyle: GoogleFonts.acme(
-                                  fontSize: 15,
-                                ),
+                                hintStyle: CustomFonts.HINT_TEXT,
                               ),
                             ),
                             //Forgot password
@@ -151,7 +142,7 @@ class _SigninState extends State<Login> {
                                     const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Text(
                                   "Forgot Password?",
-                                  style: GoogleFonts.acme(),
+                                  style: CustomFonts.FORGOT_PWD,
                                 ),
                               ),
                             ),
@@ -169,40 +160,43 @@ class _SigninState extends State<Login> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: TextButton(
-                                onPressed: () {
-                                  widget.toggle();
-                                  print('login');
+                                onPressed: () async {
+                                  try {
+                                    await Authenticate.login(
+                                        email.text, password.text);
+                                  } catch (e) {
+                                    print(e.toString());
+                                  }
                                 },
                                 child: Text(
                                   'Submit',
-                                  style: GoogleFonts.acme(
-                                    color: CustomColors.DEFAULT_COLOR,
-                                    fontSize: 18,
-                                  ),
+                                  style: CustomFonts.SUBMIT,
                                 ),
                               ),
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            //login option
-                            Center(
-                              child: RichText(
-                                text: TextSpan(
-                                  style: GoogleFonts.acme(color: Colors.grey),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: "Don't have an Account?",
-                                    ),
-                                    TextSpan(
-                                      text: "  Signin!",
-                                      style: GoogleFonts.acme(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                            //Signin option
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have an Account?",
                                 ),
-                              ),
+                                GestureDetector(
+                                  onTap: widget.toggle,
+                                  child: Text(
+                                    " Signin!",
+                                    style: CustomFonts.SUBMIT.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               height: 20,
