@@ -15,8 +15,8 @@ class PersonTileList extends StatelessWidget {
     List<ChatUser> pinnedPersons = [];
     List<ChatUser> notPinnedPersons = [];
     persons.forEach((element) {
-      print(
-          'Inside Person Tile List: $element ${persons[0].username} ${persons[1].username}');
+      /*print(
+          'Inside Person Tile List: $element ${persons[0].username} ${persons[1].username}');*/
       element.pinned
           ? pinnedPersons.add(element)
           : notPinnedPersons.add(element);

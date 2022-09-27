@@ -1,7 +1,4 @@
 import 'package:chat_app/models/currentUser.dart';
-import 'package:chat_app/screen/home/chatScreen.dart';
-import 'package:chat_app/screen/auth/login.dart';
-import 'package:chat_app/screen/auth/signin.dart';
 import 'package:chat_app/screen/wrapper.dart';
 import 'package:chat_app/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';

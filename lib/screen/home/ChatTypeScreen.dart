@@ -180,10 +180,13 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                               onPressed: () async {
                                 if (info.isNotEmpty) {
                                   controller.clear();
+                                  DateTime date = DateTime.now();
+                                  //String date_string = DateFormat()
                                   await dbc.addChat(
                                       UserChat(info: info, date: '9:12'),
                                       total + 1);
                                   total += 1;
+                                  info = '';
                                 }
                               },
                             ),

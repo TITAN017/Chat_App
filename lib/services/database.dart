@@ -126,7 +126,7 @@ class DatabaseChat {
           .doc(user.name)
           .collection('Friends')
           .doc(friend.id)
-          .update({'total': 0});
+          .update({'total': 0, 'msg': '', 'last_msg': ''});
     } catch (e) {
       print('error delete all : $e');
     }

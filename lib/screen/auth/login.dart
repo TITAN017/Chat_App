@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 
 class _SigninState extends State<Login> {
   bool isObscure = true;
-  late GlobalKey key;
+  late GlobalKey<FormState> key;
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   Color color = Colors.black;
@@ -100,7 +100,8 @@ class _SigninState extends State<Login> {
                             //Email Field
                             TextFormField(
                               controller: email,
-                              validator: (val) => null,
+                              validator: (val) =>
+                                  val!.length > 6 ? null : 'Invalid Email',
                               decoration: InputDecoration(
                                 hintText: "Your Email",
                                 hintStyle: CustomFonts.HINT_TEXT,
@@ -121,7 +122,8 @@ class _SigninState extends State<Login> {
                             TextFormField(
                               controller: password,
                               obscureText: isObscure,
-                              validator: (val) => null,
+                              validator: (val) =>
+                                  val!.isNotEmpty ? null : 'Invalid Password',
                               decoration: InputDecoration(
                                 hintText: "Password",
                                 suffixIcon: IconButton(
@@ -162,10 +164,15 @@ class _SigninState extends State<Login> {
                               child: TextButton(
                                 onPressed: () async {
                                   try {
-                                    await Authenticate.login(
-                                        email.text, password.text);
+                                    if (key.currentState!.validate()) {
+                                      await Authenticate.login(
+                                          email.text, password.text);
+                                    }
                                   } catch (e) {
                                     print(e.toString());
+                                  } finally {
+                                    email.clear();
+                                    password.clear();
                                   }
                                 },
                                 child: Text(

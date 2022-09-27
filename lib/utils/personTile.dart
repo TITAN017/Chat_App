@@ -92,7 +92,7 @@ class PersonTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        user.date,
+                        user.date.isEmpty ? 'NoMsg' : user.date,
                         style: GoogleFonts.acme(
                           color: CustomColors.MESSAGE_TEXT_COLOR,
                           fontSize: 15,
@@ -110,7 +110,9 @@ class PersonTile extends StatelessWidget {
                             ? Text(
                                 user.recentText.length > 30
                                     ? '${user.recentText.substring(0, 26)}...'
-                                    : user.recentText,
+                                    : user.recentText.isEmpty
+                                        ? 'Say Hello! to ${user.username}'
+                                        : user.recentText,
                                 style: GoogleFonts.acme(
                                   fontSize: 15,
                                   color: !user.typing
