@@ -40,7 +40,7 @@ class _SigninState extends State<Signin> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return loading
-        ? CircularProgressIndicator()
+        ? Scaffold(body: Center(child: CircularProgressIndicator()))
         : Container(
             decoration: BoxDecoration(
               image: DecorationImage(

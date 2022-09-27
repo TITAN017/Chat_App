@@ -50,7 +50,8 @@ class Authenticate {
       CurrentUser currentuser = convertUID(u);
       Database.ref.doc(currentuser.name)
         ..set({'name': name, 'online': true})
-        ..collection('Friends');
+        ..collection('Friends').doc('Friend_1');
+
       return currentuser;
     } catch (e) {
       print('signin error');

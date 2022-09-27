@@ -136,7 +136,7 @@ class PersonTile extends StatelessWidget {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: '${user.username} is typing...',
+                                      text: 'Typing...',
                                       style: GoogleFonts.acme(
                                         fontSize: 15,
                                         color: Colors.blue[800],

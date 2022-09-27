@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 //ignore_for_file:prefer_const_constructors
 
@@ -28,6 +29,7 @@ class ChatTypeScreen extends StatefulWidget {
 
 class _ChatTypeScreenState extends State<ChatTypeScreen> {
   late DatabaseChat dbc;
+  bool update = true;
   @override
   void initState() {
     super.initState();
@@ -143,6 +145,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                   decoration: BoxDecoration(
                     color: Colors.blueGrey[900]!,
                   ),
+                  width: MediaQuery.of(context).size.width,
                   height: 80,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 15,
@@ -152,7 +155,7 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 300,
+                        width: (MediaQuery.of(context).size.width - 30) * 0.8,
                         padding: CustomInsets.CHAT_TEXT_FIELD_PADDING,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -165,8 +168,19 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                             fontSize: 18,
                           ),
                           controller: controller,
-                          onChanged: (val) {
+                          onChanged: (val) async {
                             info = val;
+                            if (info.isEmpty) {
+                              dbc.typing(false);
+                            } else {
+                              if (update) {
+                                dbc.typing(true);
+                              } else {
+                                await Future.delayed(
+                                    Duration(milliseconds: 100));
+                                update = true;
+                              }
+                            }
                           },
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -180,10 +194,11 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                               onPressed: () async {
                                 if (info.isNotEmpty) {
                                   controller.clear();
-                                  DateTime date = DateTime.now();
-                                  //String date_string = DateFormat()
+                                  String date_string =
+                                      DateFormat('yyyy-MM-dd hh:mm:ss')
+                                          .format(DateTime.now());
                                   await dbc.addChat(
-                                      UserChat(info: info, date: '9:12'),
+                                      UserChat(info: info, date: date_string),
                                       total + 1);
                                   total += 1;
                                   info = '';
@@ -203,8 +218,10 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                         ),
                       ),
                       Container(
+                        width: (MediaQuery.of(context).size.width - 30) * 0.2,
                         decoration: BoxDecoration(
-                          borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
+                          //borderRadius: CustomInsets.CHAT_TEXT_FIELD_BORDER,
+                          shape: BoxShape.circle,
                           color: CustomColors.TEXT_BAR_COLOR,
                         ),
                         child: IconButton(
@@ -213,7 +230,6 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                             total = 0;
                           },
                           icon: Icon(Icons.add),
-                          iconSize: 30,
                           color: CustomColors.CHAT,
                         ),
                       ),

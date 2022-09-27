@@ -138,4 +138,16 @@ class DatabaseChat {
         .snapshots()
         .map((s) => (s.data() as Map<String, dynamic>)['online']);
   }
+
+  Future typing(bool status) async {
+    try {
+      await Database.ref
+          .doc(friend.id)
+          .collection('Friends')
+          .doc(user.name)
+          .update({'typing': status});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }
