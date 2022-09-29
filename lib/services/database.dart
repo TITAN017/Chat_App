@@ -120,7 +120,7 @@ class DatabaseChat {
   Future<void> deleteAll(int total) async {
     try {
       for (int i = 1; i <= total; i++) {
-        await userChat.doc('chat_$i').delete();
+        userChat.doc('chat_$i').delete();
       }
       await Database.ref
           .doc(user.name)
@@ -149,5 +149,13 @@ class DatabaseChat {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future update(String lastMsg, String msg) async {
+    Database.ref
+        .doc(friend.id)
+        .collection('Friends')
+        .doc(user.name)
+        .update({'last_msg': lastMsg, 'msg': msg, 'typing': false});
   }
 }

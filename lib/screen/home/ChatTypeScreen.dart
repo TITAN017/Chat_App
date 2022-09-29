@@ -29,6 +29,8 @@ class ChatTypeScreen extends StatefulWidget {
 
 class _ChatTypeScreenState extends State<ChatTypeScreen> {
   late DatabaseChat dbc;
+  String? last_msg;
+  String? msg;
   bool update = true;
   @override
   void initState() {
@@ -81,6 +83,11 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
             icon: Icon(Icons.keyboard_return),
             onPressed: () {
               print('Friend is : ${widget.friend.name} leaving');
+              if (last_msg != null && msg != null) {
+                print(last_msg);
+                print(msg);
+                dbc.update(last_msg!, msg!);
+              }
               Navigator.pop(context);
             },
           ),
@@ -197,9 +204,13 @@ class _ChatTypeScreenState extends State<ChatTypeScreen> {
                                   String date_string =
                                       DateFormat('yyyy-MM-dd hh:mm:ss')
                                           .format(DateTime.now());
-                                  await dbc.addChat(
+                                  last_msg = date_string;
+                                  msg = info;
+                                  dbc.addChat(
                                       UserChat(info: info, date: date_string),
                                       total + 1);
+                                  dbc.typing(false);
+                                  dbc.update(date_string, msg!);
                                   total += 1;
                                   info = '';
                                 }

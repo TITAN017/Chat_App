@@ -8,7 +8,7 @@ class CustomInsets {
     bottomRight: Radius.circular(45),
   );
   static EdgeInsets SCREEN_PADDING = const EdgeInsets.symmetric(
-    horizontal: 20,
+    horizontal: 15,
     vertical: 10,
   );
   static BorderRadius SIGNIN_BORDER_RADIUS = const BorderRadius.only(

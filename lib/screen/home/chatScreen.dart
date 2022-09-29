@@ -137,7 +137,7 @@ class _ChatScreenState extends State<ChatScreen> {
           onPressed: () async {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text("Clicked me!"),
+                content: Text("Signed Out!"),
                 duration: Duration(seconds: 1),
                 backgroundColor: Colors.deepOrange,
               ),
