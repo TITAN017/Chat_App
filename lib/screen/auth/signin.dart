@@ -290,7 +290,7 @@ class _SigninState extends State<Signin> {
                                         child: IconButton(
                                           icon: Icon(Icons.email),
                                           onPressed: () async {
-                                            await Authenticate.signout();
+                                            //await Authenticate.signout();
                                           },
                                           color: Colors.red,
                                         ),

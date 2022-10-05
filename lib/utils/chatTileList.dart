@@ -5,8 +5,16 @@ import 'package:chat_app/utils/chatTile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChatTileList extends StatelessWidget {
-  const ChatTileList({Key? key}) : super(key: key);
+class ChatTileList extends StatefulWidget {
+  ChatTileList({Key? key}) : super(key: key);
+
+  @override
+  State<ChatTileList> createState() => _ChatTileListState();
+}
+
+class _ChatTileListState extends State<ChatTileList> {
+  final Tween<Offset> offset = Tween(begin: Offset(1, 0), end: Offset(0, 0));
+  final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +34,14 @@ class ChatTileList extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              //keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              key: listKey,
               reverse: true,
               itemCount: chats.length,
               itemBuilder: (context, index) {
-                return ChatTile(chat: chats[index]);
+                return ChatTile(
+                  chat: chats[index],
+                );
               },
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:chat_app/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//ignore_for_file:prefer_const_constructors
 
 void main() async {
   //initialize the bindings in flutter (low level process)

@@ -135,6 +135,7 @@ class _ChatScreenState extends State<ChatScreen> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.book_outlined),
           onPressed: () async {
+            await Authenticate.signout(user);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text("Signed Out!"),
@@ -142,7 +143,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 backgroundColor: Colors.deepOrange,
               ),
             );
-            await Authenticate.signout();
           },
           elevation: 0,
           backgroundColor: CustomColors.FLOAT_ACTION_BUTTON_COLOR,

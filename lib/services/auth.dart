@@ -2,7 +2,6 @@ import 'package:chat_app/models/currentUser.dart';
 import 'package:chat_app/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class Authenticate {
   final FirebaseAuth ref = FirebaseAuth.instance;
@@ -31,6 +30,7 @@ class Authenticate {
         password: password,
       );
       User? u = user.user;
+      await Database.ref.doc(convertUID(u).name).set({'online': true});
       return u;
     } catch (e) {
       print(e.toString());
@@ -60,9 +60,10 @@ class Authenticate {
   }
 
   //signout method
-  static Future signout() async {
+  static Future signout(String? user) async {
     try {
-      FirebaseAuth.instance.signOut();
+      await FirebaseAuth.instance.signOut();
+      await Database.ref.doc(user).set({'online': false});
     } catch (e) {
       print('signout error');
     }
