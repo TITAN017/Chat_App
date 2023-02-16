@@ -1,6 +1,6 @@
 # chat_app
 
-A comprehensive Chat Messaging Platform developed and built using Flutter.
+A comprehensive Chat Messaging UI developed and built using Flutter.
 
 ## Getting Started
 
